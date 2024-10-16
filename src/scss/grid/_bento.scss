@@ -1,0 +1,115 @@
+// Config
+$columns: 12;
+$column-width: calc(100% / $columns);
+$gutter-width: 20px;
+$prefix: "col";
+//$grid-breakpoints和$container-max-widths的key需要对应
+$grid-breakpoints: (
+  // sm: 576px,
+        md: 768px,
+        lg: 992px,
+        xl: 1200px,
+  // xxl: 1400px,
+);
+$container-max-widths: (
+  // sm: 540px,
+        md: 720px,
+        lg: 960px,
+        xl: 1140px,
+  // xxl: 1320px,
+);
+
+@mixin make-container() {
+  $breakpoints: map-keys($grid-breakpoints); //sm,md,lg,xl,xxl
+  @each $infix in $breakpoints {
+    @media (min-width: map-get($grid-breakpoints, $infix)) {
+      .container {
+        max-width: map-get($container-max-widths, $infix);
+      }
+    }
+  }
+  .container {
+    --gutter-x: 0.5rem;
+    margin-right: auto;
+    margin-left: auto;
+    width: 100%;
+    padding-right: calc(var(--gutter-x) * 0.5);
+    padding-left: calc(var(--gutter-x) * 0.5);
+  }
+}
+
+@mixin make-row() {
+  .row {
+    --gutter-x: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    padding-right: calc(var(--gutter-x) * 0.5);
+    padding-left: calc(var(--gutter-x) * 0.5);
+
+    > * {
+      flex-shrink: 0;
+      width: 100%;
+      max-width: 100%;
+      padding-right: calc(var(--gutter-x) * 0.5);
+      padding-left: calc(var(--gutter-x) * 0.5);
+    }
+  }
+}
+
+//通用网格
+@mixin make-general-grid {
+  .#{$prefix} {
+    flex: 1 0 0;
+  }
+  @for $i from 1 through $columns {
+    .#{$prefix}-#{$i} {
+      width: $column-width * $i;
+      flex: 0 0 auto;
+    }
+  }
+}
+
+//通用offset
+@mixin make-general-offset {
+  @for $i from 1 to $columns {
+    .offset-#{$i} {
+      margin-left: $column-width * $i;
+    }
+  }
+}
+
+// 响应式
+@mixin make-responsive {
+  $breakpoints: map-keys($grid-breakpoints); //前缀：sm,md,lg,xl,xxl
+  @each $infix in $breakpoints {
+    @media (min-width: map-get($grid-breakpoints, $infix)) {
+      //responsive general grid
+      .#{$prefix}-#{$infix} {
+        flex: 1 0 0%;
+      }
+      //responsive grid
+      @for $i from 1 through $columns {
+        .#{$prefix}-#{$infix}-#{$i} {
+          width: $column-width * $i;
+          flex: 0 0 auto;
+        }
+      }
+      //responsive offset
+      @for $i from 1 to $columns {
+        .offset-#{$infix}-#{$i} {
+          margin-left: $column-width * $i;
+        }
+      }
+    }
+  }
+}
+
+@mixin make() {
+  @include make-container();
+  @include make-row();
+  @include make-general-grid();
+  @include make-general-offset();
+  @include make-responsive();
+}
+
+@include make();

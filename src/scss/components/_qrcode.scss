@@ -1,0 +1,69 @@
+.qrcode {
+  display: flex;
+  padding: 1rem 0;
+  justify-content: center;
+  border-top: 1px solid var(--border);
+
+  &-wrapper {
+    fill: var(--black);
+    display: flex;
+    padding: 0 10px;
+    position: relative;
+    align-items: center;
+    flex-direction: column;
+    transition: all 0.4s ease-out;
+
+    &:hover {
+      fill: var(--theme-9);
+    }
+
+    &-container {
+      padding: 0 15px 15px 15px;
+      opacity: 0;
+      width: auto;
+      background-color: #fff;
+      text-align: center;
+      visibility: hidden;
+      border-radius: var(--radius);
+      box-shadow: 0 0 10px 8px rgba(116, 116, 116, 0.08);
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      /* 使用一半宽度来居中提示工具的内容 */
+      transition: all 0.4s ease-out;
+
+      &::after {
+        content: " ";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -10px;
+        border-width: 10px;
+        border-style: solid;
+        border-color: #fff transparent transparent transparent;
+      }
+
+      > p {
+        margin: 7px 0;
+        color: black;
+        font-size: 14px;
+        font-weight: 700;
+      }
+    }
+
+    &:hover .qrcode-wrapper-container {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    &-icon {
+      width: 36px;
+      height: 36px;
+    }
+
+    &-text {
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+  }
+}

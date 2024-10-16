@@ -1,0 +1,27 @@
+.article-tags {
+  margin: 1rem 0;
+  font-size: 1rem;
+  color: var(--black);
+
+  &::after {
+    border: 1px solid var(--border);
+  }
+
+  > span {
+    display: inline-block;
+    font-size: 1rem;
+  }
+
+  a {
+    color: var(--secondaryText);
+    font-size: 1rem;
+
+    &::before {
+      content: "# ";
+    }
+
+    &:hover {
+      color: var(--primaryText);
+    }
+  }
+}

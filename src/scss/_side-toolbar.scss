@@ -1,0 +1,35 @@
+.side-toolbar {
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  right: 2%;
+  bottom: 2%;
+
+  button {
+    color: var(--primaryText);
+    background: var(--bgcolor-2);
+    margin-top: 4px;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    cursor: pointer;
+    border: none;
+    border-radius: var(--radius);
+    transition: all .1s linear;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    svg {
+      fill: var(--tertiaryText);
+    }
+
+    &:hover {
+      background: var(--theme-7);
+      color: #fff;
+      svg {
+        fill: #fff;
+      }
+    }
+  }
+}

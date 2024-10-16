@@ -1,0 +1,154 @@
+//兼容prismjs
+.code-toolbar .comment {
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.comment {
+  margin: 1rem auto;
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  box-shadow: var(--box-shadow);
+
+  &-form {
+    textarea {
+      margin: 0.5rem 0;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin-bottom: 0.5rem;
+
+      &-wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+
+        > label {
+          margin-bottom: 0.25rem;
+        }
+      }
+
+      .second-child {
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+      }
+
+      input {
+        outline: 0;
+        width: 100%;
+        font-weight: 400;
+        padding: 10px 15px;
+        border-radius: var(--radius);
+        border: 1px solid var(--border);
+        background: var(--white);
+        color: var(--black);
+        transition: border-color 0.4s ease-out;
+        box-sizing: border-box;
+
+        &:focus {
+          border-color: var(--theme-8);
+        }
+      }
+    }
+  }
+
+  &-list,
+  &-list ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &-list {
+    li {
+      margin: 10px 0;
+      padding: 14px;
+      border: 1px solid #eee;
+
+      .comment-level-odd {
+        background: #f6f6f3;
+      }
+
+      .comment-level-even {
+        background: #fff;
+      }
+
+      .comment-by-author {
+        background: #fff9e8;
+      }
+
+      .comment-reply {
+        text-align: right;
+        font-size: 0.92857rem;
+      }
+    }
+
+    .respond {
+      margin-top: 15px;
+      border-top: 1px solid #eee;
+    }
+  }
+
+  &-meta {
+    a {
+      color: #999;
+      font-size: 0.92857rem;
+    }
+  }
+
+  &-author {
+    display: block;
+    margin-bottom: 3px;
+    color: #444;
+
+    .avatar {
+      float: left;
+      margin-right: 10px;
+      max-height: 24px;
+      max-width: 24px;
+    }
+
+    cite {
+      font-weight: 700;
+      font-style: normal;
+    }
+  }
+
+  &-content {
+    word-wrap: break-word;
+  }
+
+  button {
+    &.submit {
+      padding: 10px;
+      color: var(--primaryText);
+      border-radius: 5px;
+      transition: border-color 0.4s;
+      background: var(--bgcolor-1);
+      border: 1px solid var(--border);
+
+      &:hover {
+        border-color: var(--theme-8);
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .comment {
+    &-form {
+      .input-group {
+        flex-direction: column;
+        &-wrap {
+          margin-bottom: 0.3rem;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,51 @@
+$gap: 5px;
+.footer {
+  font-size: 0.75rem;
+  margin-bottom: 1rem;
+  text-align: center;
+
+  a {
+    color: var(--black);
+
+    &:hover {
+      text-decoration: underline;
+      text-underline-offset: 0.2rem;
+    }
+  }
+
+  p {
+    margin-bottom: 0;
+  }
+
+  ul {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    position: relative;
+
+    li {
+      margin-right: $gap;
+
+      &::after {
+        background-color: #d2d2d7;
+        border-radius: 1px;
+        content: "";
+        height: 0.75rem;
+        margin: 6px 0;
+        position: absolute;
+        width: 1px;
+      }
+
+      &:last-child::after {
+        height: 0;
+        width: 0;
+        margin: 0;
+      }
+
+      a {
+        padding-right: $gap;
+      }
+    }
+  }
+}

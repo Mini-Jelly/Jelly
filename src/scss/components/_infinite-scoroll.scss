@@ -1,0 +1,38 @@
+.load-more-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1.5rem;
+
+  > button {
+    font-size: 1rem;
+    padding: .8rem;
+    color: #fff;
+    background-color: var(--theme-8);
+    border: none;
+    border-radius: var(--radius);
+    transition: background-color .4s ease-out;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background-color: var(--theme-7);
+    }
+
+    &:active:focus-visible {
+      background-color: var(--theme-9);
+      border-style: none;
+    }
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

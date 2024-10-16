@@ -1,0 +1,88 @@
+.paginator {
+  margin-top: 1.5rem;
+  padding: 0;
+  list-style: none;
+  text-align: center;
+
+  li {
+    display: inline-block;
+    margin: 0 4px;
+
+    a {
+      cursor: pointer;
+      height: auto;
+      color: var(--primaryText);
+      padding: 0 10px;
+      line-height: 30px;
+      display: inline-block;
+      border-radius: var(--radius);
+      border: 1px solid transparent;
+      transition: border-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+
+      &:hover {
+        outline: 0;
+        text-decoration: none;
+        border-color: #d0d7de;
+        transition-duration: 0.1s;
+      }
+    }
+
+    &.active {
+      background: var(--theme-9);
+      border-radius: var(--radius);
+
+      a {
+        color: #fff;
+        transition: none;
+      }
+    }
+
+    &.prev a,
+    &.next a {
+      color: var(--theme-9);
+    }
+
+    &.prev a::before,
+    &.next a::after {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      vertical-align: text-bottom;
+      content: "";
+      background-color: currentColor;
+    }
+
+    &.prev a::before {
+      margin-right: 4px;
+      margin-bottom: 2px;
+
+      clip-path: polygon(
+                      9.8px 12.8px,
+                      8.7px 12.8px,
+                      4.5px 8.5px,
+                      4.5px 7.5px,
+                      8.7px 3.2px,
+                      9.8px 4.3px,
+                      6.1px 8px,
+                      9.8px 11.7px,
+                      9.8px 12.8px
+      );
+    }
+
+    &.next a::after {
+      margin-left: 4px;
+      margin-bottom: 2px;
+      clip-path: polygon(
+                      6.2px 3.2px,
+                      7.3px 3.2px,
+                      11.5px 7.5px,
+                      11.5px 8.5px,
+                      7.3px 12.8px,
+                      6.2px 11.7px,
+                      9.9px 8px,
+                      6.2px 4.3px,
+                      6.2px 3.2px
+      );
+    }
+  }
+}

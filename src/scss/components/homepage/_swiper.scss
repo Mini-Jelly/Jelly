@@ -1,0 +1,30 @@
+$swiperHeight: 250px;
+:root {
+  --swiper-theme-color: var(--theme-9) !important;
+}
+
+.swiper {
+  height: $swiperHeight;
+  margin: 1rem 0;
+}
+
+.swiper-slide {
+  img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    border-radius: var(--radius);
+  }
+}
+
+@media only screen and (max-width: 833px) {
+  .swiper {
+    height: $swiperHeight * 0.7;
+  }
+}
+
+@media only screen and (max-width: 629px) {
+  .swiper {
+    height: $swiperHeight * 0.5;
+  }
+}

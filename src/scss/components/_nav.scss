@@ -1,0 +1,410 @@
+:root {
+  --nav-height: 44px;
+  --nav-color: #e8e8ed;
+  --nav-color-hover: #fff;
+  --nav-background: rgba(0, 0, 0, 0.8);
+  --nav-background-opened: #000;
+  --nav-backdrop-filter: saturate(180%) blur(20px);
+}
+
+//全屏幕拥有的公共属性
+.nav {
+  position: fixed;
+  z-index: 3;
+  width: 100%;
+  height: var(--nav-height);
+  background-color: var(--nav-background);
+  backdrop-filter: var(--nav-backdrop-filter);
+  transform: translateZ(0); //提高filter性能,比较玄学
+
+  &-content {
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    top: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+    .nav {
+      &-logo {
+        color: #fff;
+        font-size: 35px;
+        width: var(--nav-height);
+        height: var(--nav-height);
+
+        > img {
+          width: var(--nav-height);
+          height: var(--nav-height);
+          max-height: var(--nav-height);
+          vertical-align: top;
+          position: relative;
+        }
+      }
+
+      &-list {
+        visibility: hidden; //防止窗口大小变换的时候闪烁
+        list-style: none;
+        width: 100%;
+        display: flex;
+        padding: 0;
+      }
+
+    }
+  }
+}
+
+//大于等于834,834 and up
+@media only screen and (min-width: 834px) {
+  .nav-content {
+    .nav-form {
+      left: 26%;
+      width: 50%;
+      display: flex;
+      height: var(--nav-height);
+      position: absolute;
+      animation-name: fadeOut;
+      animation-delay: 0s;
+      animation-duration: 0.2s;
+      animation-fill-mode: both;
+      visibility: hidden;
+      transition-property: visibility;
+      transition-duration: 0.2s;
+      transition-timing-function: linear;
+
+      button {
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        opacity: 0.6;
+        transition-property: opacity;
+        transition-duration: 0.4s;
+        transition-timing-function: linear;
+
+        // transition-delay: 0ms;
+        &:hover {
+          opacity: 1;
+        }
+      }
+
+      &-input {
+        width: 100%;
+        border: none;
+        font-size: 1rem;
+        margin: 0 4px;
+        color: #fff;
+        background: transparent;
+      }
+    }
+
+    .nav-form-open-button {
+      //控制淡入淡出动画
+      width: var(--nav-height);
+      height: var(--nav-height);
+      background: transparent;
+      border: none;
+      opacity: 0.8;
+      cursor: pointer;
+      visibility: visible;
+      transition-property: opacity, visibility;
+      transition-duration: 0.16s;
+      transition-timing-function: linear;
+      transition-delay: 0s;
+
+      svg {
+        //控制缩放变小动画
+        width: 18px;
+        height: 44px;
+        transition-property: width;
+        transition-duration: 0.16s;
+        transition-timing-function: linear;
+        transition-delay: calc(80ms * (1 + var(--nav-list-item-total)));
+      }
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+
+    .nav-list {
+      height: var(--nav-height);
+      cursor: default;
+      user-select: none;
+      line-height: var(--nav-height);
+
+      li {
+        // 第二次点
+        transition-property: opacity, font-size, visibility;
+        transition-duration: 0.24s;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.6, 1);
+        transition-delay: calc(80ms * var(--nav-list-item-number));
+        text-align: center;
+        width: 100%;
+
+        a {
+          color: var(--nav-color);
+          visibility: visible;
+          display: block;
+          width: 100%;
+
+          &:hover {
+            color: var(--nav-color-hover);
+          }
+        }
+      }
+    }
+  }
+  .nav[search] {
+    .nav-form-open-button {
+      opacity: 0;
+      visibility: hidden;
+
+      svg {
+        width: 0;
+        transition-delay: 0s;
+      }
+    }
+
+    .nav-form {
+      //animation-name实际上相当于transition-property的精细化控制
+      //一旦定义animation-name则动画开始执行，但是transition-property所监听的需要发生改变
+      //一个是因为谁变了，要过渡，一个是主动变过去
+      animation-name: fadeInRight;
+      animation-delay: 0.24s;
+      animation-duration: 0.6s;
+      animation-fill-mode: both;
+      visibility: visible;
+    }
+
+    .nav-list li {
+      animation-name: zoomOut;
+      font-size: 0.75rem;
+      visibility: hidden;
+      opacity: 0;
+      transition-delay: calc(80ms * calc(var(--nav-list-item-total) - var(--nav-list-item-number)));
+
+      a {
+        visibility: hidden;
+        transition: visibility 1s step-end;
+      }
+    }
+  }
+}
+
+//小于等于833,833 and down
+@media only screen and (max-width: 833px) {
+  //手机端情况下不需要打开搜索框
+  .nav-form-open-button, .nav-form-close-button {
+    display: none;
+  }
+
+  .nav {
+    backdrop-filter: none;
+    transition-property: background, height;
+    transition-duration: var(--nav-flyout-rate);
+    transition-timing-function: cubic-bezier(0.4, 0, 0.6, 1);
+    transition-delay: 80ms;
+
+  }
+
+  .nav-content {
+    flex-direction: column;
+
+    .nav-form {
+      //position: absolute;
+      margin-top: 8px;
+      padding: 0 8%;
+      width: 100%;
+      display: flex;
+      opacity: 0;
+      transform: translateY(-8px);
+      visibility: hidden;
+      transition-property: opacity, transform, visibility;
+      transition-duration: 0.24s;
+      transition-timing-function: cubic-bezier(0.4, 0, 0.6, 1);
+      //transition-delay: 0ms;
+
+      &-submit {
+        border: none;
+        display: flex;
+        cursor: pointer;
+        padding: 0 10px;
+        align-items: center;
+        background-color: transparent;
+      }
+
+      &-input {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        color: #e8e8ed;
+        font-size: 1.75rem;
+        font-weight: 600;
+        line-height: 1.5;
+        border: none;
+        background-color: transparent;
+      }
+    }
+
+    .nav-list {
+      //margin-top: 55px;
+      flex-direction: column;
+      justify-content: normal;
+      //关闭
+      li {
+        line-height: 47px;
+        padding: 2px 0;
+        margin: 0 8%;
+        opacity: 0;
+        transform: translateY(-8px);
+        visibility: hidden;
+        transition-property: opacity, transform, visibility;
+        transition-duration: min(
+                0.16s + (20ms * calc(var(--nav-list-item-total) - var(--nav-list-item-number))),
+                0.24s
+        );
+        transition-timing-function: cubic-bezier(0.4, 0, 0.6, 1);
+        transition-delay: 0s, 0s, 0.24s;
+
+        a {
+          font-size: 1.75rem;
+          width: 100%;
+          display: block;
+          padding-left: 10px;
+          color: var(--nav-color);
+          border-radius: var(--radius);
+
+          &:hover {
+            background: rgb(29, 29, 31);
+            color: var(--nav-color-hover);
+          }
+        }
+      }
+    }
+  }
+
+  .nav[open] {
+    height: 100vh;
+    background: var(--nav-background-opened);
+    transition-delay: 0ms;
+
+    .nav-content {
+      .nav-form {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+        transition-delay: 0.2s;
+      }
+
+      .nav-list {
+        //打开
+        li {
+          opacity: 1;
+          visibility: visible;
+          transform: translate(0);
+          transition-duration: 0.24s;
+          transition-property: opacity, transform, visibility;
+          transition-delay: calc(0.2s + (var(--nav-list-item-number) * 60ms));
+          transition-timing-function: cubic-bezier(0.4, 0, 0.6, 1), cubic-bezier(0.4, 0, 0.6, 1), step-start;
+
+          a {
+            transition: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+.nav-menu-trigger {
+  top: 0;
+  left: 0;
+  display: block;
+  z-index: 3;
+  margin: 0;
+  position: absolute;
+  @media only screen and (min-width: 834px) {
+    & {
+      display: none;
+    }
+  }
+
+  &-button {
+    visibility: visible;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    background: transparent;
+    border: none;
+    opacity: 0.8;
+    width: var(--nav-height);
+    height: var(--nav-height);
+    cursor: pointer;
+    outline-offset: -7px;
+    transition-property: opacity, color;
+    transition-duration: 0.32s;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.6, 1);
+    //transition-delay:0ms;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .nav-content {
+    max-width: 774px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .nav-content {
+    max-width: 948px;
+  }
+}
+
+@-webkit-keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translate3d(100px, 0, 0);
+    animation-timing-function: cubic-bezier(0.67, 0, 0.33, 1);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateZ(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translate3d(100px, 0, 0);
+    animation-timing-function: cubic-bezier(0.67, 0, 0.33, 1);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateZ(0);
+  }
+}
+
+@-webkit-keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}

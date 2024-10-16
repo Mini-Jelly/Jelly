@@ -1,0 +1,14 @@
+.archive-title {
+  margin: 1rem 0 -1rem 0;
+  color: var(--secondaryText);
+  font-size: 1.2rem;
+  position: relative;
+  z-index: 2;
+}
+
+@media (max-width: 833px) {
+  .archive-title {
+    font-size: 1rem;
+    margin: .5rem 0 -.5rem 0;
+  }
+}
