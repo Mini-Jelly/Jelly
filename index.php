@@ -1,9 +1,9 @@
 <?php
 /**
- * Jelly Beat 241016
+ * Jelly Beat 241102
  * @package Jelly
  * @author Mini-Jelly
- * @version Beat 241016
+ * @version Beat 241102
  * @link https://jntm6.eu.org
  */
 if (!defined('__TYPECHO_ROOT_DIR__'))
@@ -25,8 +25,6 @@ $this->need('header.php'); ?>
           }
         } ?>
         <h3>🔥最新文章</h3>
-        <?php if ($this->currentPage == 1 && $this->options->stickyCid)
-          $this->need('./components/homepage/sticky-article.php'); ?>
         <?php $this->need('./components/content-preview.php'); ?>
       </main>
     </div>
@@ -39,4 +37,4 @@ $this->need('header.php'); ?>
     $this->need('./components/paginator.php');
   ?>
 </div>
-<?php $this->need('footer.php');?>
+<?php $this->need('footer.php'); ?>

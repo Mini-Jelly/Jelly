@@ -34,55 +34,6 @@ function getDaysSinceLastUpdate(int $modified): int
   return round((strtotime($currentDate) - strtotime($lastUpdateDate)) / 86400);
 }
 
-/**
- * 显示文章卡片
- *
- * 该函数用于生成文章卡片的HTML结构，并显示文章标题、摘要、分类、日期等信息。
- *
- * @param object $object 文章对象，包含文章相关信息如permalink、category等
- * @param string $title 文章标题
- * @return void
- */
-function displayArticle(object $object, string $title)
-{
-  $permalink = $object->permalink;
-  $category = $object->category;
-  ?>
-  <article class="article-entry">
-    <div class="article-cover">
-      <a href="<?php echo $permalink ?>" title="<?php echo $title ?>"></a>
-      <img class="lazyload"
-           src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-           data-src="<?php echo getThumbnail($object) ?>" alt="<?php echo $title ?>">
-    </div>
-    <div class="article-info">
-      <header class="article-info-header">
-        <h2>
-          <a href="<?php echo $permalink ?>"><?php echo $title ?></a>
-        </h2>
-      </header>
-      <div class="article-info-content">
-        <p>
-          <?php $object->excerpt(160, '...'); ?>
-        </p>
-      </div>
-      <footer class="article-info-footer">
-            <span>
-                <?php
-                $str = trim($category);
-                if ($str !== "") {
-                  echo $category . " · ";
-                }
-                $object->date('Y-m-d');
-                ?>
-            </span>
-      </footer>
-    </div>
-    <a href="<?php echo $permalink ?>" class="entry-link" title="<?php echo $title ?>"></a>
-  </article>
-  <?php
-}
-
 //获取Gravatar头像 QQ邮箱取用qq头像
 function getGravatar($email, $s = 96, $d = 'mp', $r = 'g', $img = false, $atts = array())
 {

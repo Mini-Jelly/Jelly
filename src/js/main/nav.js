@@ -1,35 +1,21 @@
+// import { getById } from "./global";
 // 页面DOM加载事件
 document.addEventListener("DOMContentLoaded", function () {
-  const nav = document.getElementById("nav");
-  let fullScreenController = false;
-  let smallScreenController = false;
-  let delayTime = 700;
-  let throttled = false;
-  const debounceResize = debounce(cleanNavClass, delayTime);
-  // window.addEventListener("resize", debounceResize);
-  window.addEventListener("resize", function () {
-    if (!throttled) {
-      throttled = true;
-      debounceResize();
-      setTimeout(function () {
-        throttled = false;
-      }, delayTime);
-    }
-  });
+  const nav = getById("nav");
+  const mnav = getById("mnav");
 
   //获取触发按钮,触发按钮动画并根据css效果打开菜单
-  document.getElementById("nav-menu-trigger-button").addEventListener("click", function () {
-
+  getById("mnav-menu-trigger-button").addEventListener("click", function () {
     // 锁定按钮,防止频繁点击
-    lockElement(this, Math.max(window.innerHeight, 480) * 0.5 + 80);
+    lockElement(this, Math.max(window.innerHeight, 480) / 2 + 80);
 
     // 如果当前处于 open 状态
-    if (nav.hasAttribute("open")) {
+    if (mnav.hasAttribute("open")) {
       // 移除 open 状态
-      nav.removeAttribute("open");
+      mnav.removeAttribute("open");
       runNavCloseAnimation();
     } else {
-      nav.setAttribute("open", "");
+      mnav.setAttribute("open", "");
       runNavOpenAnimation();
     }
     addNavFlyoutDelay();
@@ -54,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
   //添加监听，触发鼠标移动效果(win10的菜单动画效果)
-  const nav_form_open_btn = document.getElementById("nav-form-open-button");
+  const nav_form_open_btn = getById("nav-form-open-button");
   const logo = document.querySelector(".nav-logo");
   nav_form_open_btn.addEventListener("mousemove", addMouseEffect);
   nav_form_open_btn.addEventListener("mouseleave", removeMouseEffect);
@@ -67,21 +53,31 @@ document.addEventListener("DOMContentLoaded", function () {
 
   //关闭搜索
   nav_form_open_btn.addEventListener("click", toggleSearchBox);
-  document.getElementById("nav-form-close-button").addEventListener("click", toggleSearchBox);
+  getById("nav-form-close-button").addEventListener("click", toggleSearchBox);
 
   // 在此添加要在页面加载时自动执行的函数
-  AddNum();
+  addNum();
   addNavFlyoutDelay();
 
   //给li标签添加数字标号的style
-  function AddNum() {
+  function addNum() {
+    // 获取列表项
+    const mChildren = mnav.querySelectorAll("li");
     const children = nav.querySelectorAll("li");
-    children.forEach((child, index) => {
-      child.style.setProperty("--nav-list-item-number", index);
-    });
-
-    const listItems = Array.from(children);
-    document.documentElement.style.setProperty("--nav-list-item-total", listItems.length);
+    // 为每个列表项设置样式
+    const setListItemStyles = (items) => {
+      items.forEach((child, index) => {
+        child.style.setProperty("--list-item-number", index);
+      });
+    };
+    setListItemStyles(mChildren);
+    setListItemStyles(children);
+    // 检查两个列表的长度是否相等
+    if (mChildren.length === children.length) {
+      document.documentElement.style.setProperty("--list-item-total", children.length);
+    } else {
+      console.log("非法的分类！");
+    }
   }
 
   //根据屏幕高度计算导航栏飞出延迟时间
@@ -89,24 +85,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // 获取屏幕高度
     const screenHeight = Math.max(window.innerHeight, 480);
     // 将屏幕高度计算成速度映射到CSS中
-    document.documentElement.style.setProperty("--nav-flyout-rate", `${screenHeight / 2}ms`);
-  }
-
-  //清除导航栏中的class类
-  function cleanNavClass() {
-    const windowWidth = getWindowWidth();
-    if (windowWidth < 834 && !fullScreenController) {
-      //关闭搜索框的触发状态
-      nav.removeAttribute("search");
-      fullScreenController = true;
-      smallScreenController = false;
-    } else if (windowWidth >= 834 && !smallScreenController) {
-      //关闭导航栏的打开状态
-      nav.removeAttribute("open");
-      runNavCloseAnimation();
-      fullScreenController = false;
-      smallScreenController = true;
-    }
+    document.documentElement.style.setProperty("--flyout-rate", `${screenHeight / 2}ms`);
   }
 
   //搜索状态控制
@@ -115,7 +94,7 @@ document.addEventListener("DOMContentLoaded", function () {
       nav.removeAttribute("search");
     } else {
       nav.setAttribute("search", "");
-      const inputBox = document.getElementById('nav-form-input');
+      const inputBox = getById("nav-form-input");
       setTimeout(() => {
         inputBox.focus();
       }, 100);
@@ -131,17 +110,6 @@ document.addEventListener("DOMContentLoaded", function () {
     return Math.max(window.innerWidth || 0, document.documentElement.clientWidth || 0, document.body.clientWidth || 0);
   }
 
-  //延迟执行函数,防抖方法
-  function debounce(func, delay) {
-    let timeoutId;
-    return function debounced(...args) {
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(function delayed() {
-        func.apply(this, args);
-      }, delay);
-    };
-  }
-
   //锁定一个元素
   function lockElement(element, time) {
     element.disabled = true;
@@ -152,13 +120,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   //执行按钮的打开动画
   function runNavOpenAnimation() {
-    document.getElementById("nav-anim-menu-trigger-bread-top-open").beginElement();
-    document.getElementById("nav-anim-menu-trigger-bread-bottom-open").beginElement();
+    getById("mnav-anim-menu-trigger-bread-top-open").beginElement();
+    getById("mnav-anim-menu-trigger-bread-bottom-open").beginElement();
   }
 
   //执行按钮的关闭动画
   function runNavCloseAnimation() {
-    document.getElementById("nav-anim-menu-trigger-bread-top-close").beginElement();
-    document.getElementById("nav-anim-menu-trigger-bread-bottom-close").beginElement();
+    getById("mnav-anim-menu-trigger-bread-top-close").beginElement();
+    getById("mnav-anim-menu-trigger-bread-bottom-close").beginElement();
   }
 });
