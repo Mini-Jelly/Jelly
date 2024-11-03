@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", function () {
   getById("mnav-menu-trigger-button").addEventListener("click", function () {
     // 锁定按钮,防止频繁点击
     lockElement(this, Math.max(window.innerHeight, 480) / 2 + 80);
-
     // 如果当前处于 open 状态
     if (mnav.hasAttribute("open")) {
       // 移除 open 状态

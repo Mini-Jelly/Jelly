@@ -77,7 +77,7 @@ function themeConfig($form)
       'staticfile' => 'StaticfileCDN（七牛云）',
       'bootcdn' => 'BootCDN（又拍云）',
     ),
-    'staticfile',
+    'off',
     '是否使用cdn加速静态公共资源',
     '介绍：选择公共js和css资源是否使用CDN加速方案</br>
           说明：如果你的云主机比较卡或者网页加载速度慢可以尝试开启,关闭则默认使用本地方案</br>
@@ -130,8 +130,9 @@ function themeConfig($form)
   $swiper = new Typecho_Widget_Helper_Form_Element_Textarea(
     'swiper',
     NULL,
-    'usr/themes/Jelly/assets/img/swiper/swiper1.webp||https://jntm6.eu.org||鸡你太美6
-    usr/themes/Jelly/assets/img/swiper/swiper2.webp||https://jntm6.eu.org||广告招租位',
+    'usr/themes/Jelly/assets/img/swiper/swiper1.webp||https://jjj8.top||勾勾勾8点拓
+    usr/themes/Jelly/assets/img/swiper/swiper2.webp||https://jjj8.top||广告招租位,
+    usr/themes/Jelly/assets/img/swiper/swiper3.webp||https://jjj8.top||请使用VPN访问网站',
     '轮播图',
     '介绍：用于在首页展示轮播图 <br />
          格式：图片链接 || 跳转链接 || 跳转文字 <br />

@@ -181,7 +181,7 @@
     //一旦定义animation-name则动画开始执行，但是transition-property所监听的需要发生改变
     //一个是因为谁变了，要过渡，一个是主动变过去
     animation-name: fadeInRight;
-    animation-delay: 0.24s;
+    animation-delay: calc(80ms * var(--list-item-total));
     animation-duration: 0.6s;
     animation-fill-mode: both;
     visibility: visible;
@@ -244,11 +244,12 @@
   .mnav-content {
     display: flex;
     flex-direction: column;
+    height: 100%;
 
     .mnav-logo {
       width: var(--nav-height);
       height: var(--nav-height);
-      margin: auto; //使得元素居中
+      margin: 0 auto; //使得元素居中
       img {
         width: var(--nav-height);
         height: var(--nav-height);
@@ -295,6 +296,12 @@
     }
 
     .mnav-list {
+      overflow-y: scroll;
+      margin-bottom: 5%;
+      scrollbar-width: none; /* Firefox */
+      &::-webkit-scrollbar{
+        display: none; /* Chrome 和 Safari */
+      }
       li {
         list-style: none;
         line-height: var(--nav-height);

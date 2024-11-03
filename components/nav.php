@@ -38,7 +38,7 @@
     </button>
     <form class="nav-form" method="post" action="<?php $this->options->siteUrl(); ?>">
       <button class="nav-form-submit" aria-label="Submit" type="submit">
-        <svg x="1687783407648" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="20" height="48">
+        <svg x="1687783407648" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="20" height="44">
           <path
             d="M950.071755 908.285558 706.231191 664.444994c53.31323-63.253626 85.541235-144.807037 85.541235-234.007615 0-200.797235-162.77834-363.575576-363.575576-363.575576S64.621275 229.640144 64.621275 430.437379c0 200.797235 162.77834 363.575576 363.575576 363.575576 91.494831 0 174.795025-34.031071 238.705614-89.802282l243.621577 243.621577c11.79872 11.79872 30.15274 12.45466 41.077557 1.529843C962.525392 938.437276 961.870476 920.083256 950.071755 908.285558zM120.556215 430.437379c0-169.661098 138.033773-307.640636 307.640636-307.640636 169.661098 0 307.640636 137.979538 307.640636 307.640636 0 169.661098-137.979538 307.640636-307.640636 307.640636C258.589988 738.078015 120.556215 600.098477 120.556215 430.437379z"
             fill="#ffffff">
@@ -47,7 +47,7 @@
       </button>
       <input name="s" class="nav-form-input" id="nav-form-input" placeholder="Search" autocomplete="off" type="text">
       <button id="nav-form-close-button" class="nav-form-close-button" type="button">
-        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="22" height="48">
+        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="22" height="44">
           <path d="M872.802928 755.99406 872.864326 755.99406 872.864326 755.624646Z" fill="#bfbfbf">
           </path>
           <path
