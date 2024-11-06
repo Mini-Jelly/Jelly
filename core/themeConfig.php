@@ -90,11 +90,11 @@ function themeConfig($form)
   $banner = new Typecho_Widget_Helper_Form_Element_Text(
     'banner',
     NULL,
-    'usr/themes/Jelly/assets/img/banner/banner.webp',
+    'usr/themes/Jelly/assets/img/banner/banner.png',
     '主页 横幅 地址',
     '介绍：在这里填入一个图片地址用于在主页显示一个横幅，或者使用图片替换原图即可<br />
          其他：横幅可以视作广告牌，建议大小：947 x 400 px<br />
-         例如：usr/themes/Jelly/assets/img/banner/banner.webp'
+         例如：usr/themes/Jelly/assets/img/banner/banner.png'
   );
   $banner->setAttribute('class', 'jelly-option Home');
   $form->addInput($banner);
@@ -130,9 +130,9 @@ function themeConfig($form)
   $swiper = new Typecho_Widget_Helper_Form_Element_Textarea(
     'swiper',
     NULL,
-    'usr/themes/Jelly/assets/img/swiper/swiper1.webp||https://jjj8.top||勾勾勾8点拓
-    usr/themes/Jelly/assets/img/swiper/swiper2.webp||https://jjj8.top||广告招租位,
-    usr/themes/Jelly/assets/img/swiper/swiper3.webp||https://jjj8.top||请使用VPN访问网站',
+    'usr/themes/Jelly/assets/img/swiper/swiper1.png||https://jjj8.top||勾勾勾8点拓
+    usr/themes/Jelly/assets/img/swiper/swiper2.png||https://jjj8.top||广告招租位,
+    usr/themes/Jelly/assets/img/swiper/swiper3.png||https://jjj8.top||请使用VPN访问网站',
     '轮播图',
     '介绍：用于在首页展示轮播图 <br />
          格式：图片链接 || 跳转链接 || 跳转文字 <br />
@@ -177,7 +177,7 @@ function themeConfig($form)
   $QQkey = new Typecho_Widget_Helper_Form_Element_Text(
     'QQkey',
     NULL,
-    'https://qm.qq.com/q/PIEQO5iByM',
+    'https://qm.qq.com/q/zqF0ZfOFIO',
     'QQ群二维码链接',
     '介绍：填入加QQ群的二维码扫出来的链接<br />
          获取：QQ群聊二维码→识别二维码的链接→复制链接→填这👍<br />
